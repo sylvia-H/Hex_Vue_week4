@@ -39,15 +39,7 @@ var app = {
 Vue.createApp(app).mount('#app');
 "use strict";
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-var editModal = '';
-var delModal = ''; // 元件 - 後臺產品列表分頁元件
-
+// 元件 - 後臺產品列表分頁元件
 var pagination_products = {
   props: ['pagination'],
   template: '#pagination-template'
@@ -105,6 +97,16 @@ var modal_del = {
   props: ['tempItemInfo'],
   template: '#del-modal-template'
 };
+"use strict";
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var editModal = '';
+var delModal = '';
 var app2 = Vue.createApp({
   data: function data() {
     return {
@@ -124,43 +126,43 @@ var app2 = Vue.createApp({
   },
   methods: {
     checkLogin: function checkLogin() {
-      var _this2 = this;
+      var _this = this;
 
       AUTH_TOKEN = document.cookie.replace(/(?:(?:^|.*;\s*)myToken\s*\=\s*([^;]*).*$)|^.*$/, "$1");
       axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
       axios.post("".concat(baseUrl, "/api/user/check")).then(function () {
-        _this2.getProducts();
+        _this.getProducts();
       })["catch"](function (err) {
         console.log(err.response);
         window.location = './index.html';
       });
     },
     getProducts: function getProducts() {
-      var _this3 = this;
+      var _this2 = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       axios.get("".concat(baseUrl, "/api/").concat(API_PATH, "/admin/products?page=").concat(page)).then(function (res) {
         console.log(res.data.products);
-        _this3.products = res.data.products;
-        _this3.pagination = res.data.pagination;
+        _this2.products = res.data.products;
+        _this2.pagination = res.data.pagination;
       })["catch"](function (err) {
         console.log(err.response);
       });
     },
     changeStatus: function changeStatus(id) {
-      var _this4 = this;
+      var _this3 = this;
 
       this.products.forEach(function (item) {
         if (item.id === id) {
           item.is_enabled ? item.is_enabled = 0 : item.is_enabled = 1;
           console.log(item);
 
-          _this4.editProduct(item, id);
+          _this3.editProduct(item, id);
         }
       });
     },
     editProduct: function editProduct(item, id) {
-      var _this5 = this;
+      var _this4 = this;
 
       if (item) {
         this.tempItemInfo = item;
@@ -185,17 +187,17 @@ var app2 = Vue.createApp({
 
         if (httpStatus === 'post') {
           //成功新增產品，sweetalert 跳出提示訊息視窗
-          swal('成功！', "\u6210\u529F\u65B0\u589E ".concat(_this5.tempItemInfo.title), {
+          swal('成功！', "\u6210\u529F\u65B0\u589E ".concat(_this4.tempItemInfo.title), {
             icon: "success"
           });
         } else {
           //成功更新產品，sweetalert 跳出提示訊息視窗
-          swal('成功！', "\u5DF2\u66F4\u65B0 ".concat(_this5.tempItemInfo.title, " \u7684\u8CC7\u8A0A"), {
+          swal('成功！', "\u5DF2\u66F4\u65B0 ".concat(_this4.tempItemInfo.title, " \u7684\u8CC7\u8A0A"), {
             icon: "success"
           });
         }
 
-        _this5.getProducts(_this5.pagination.current_page);
+        _this4.getProducts(_this4.pagination.current_page);
       })["catch"](function (err) {
         console.log(err.response);
         var errMSG = err.response.data.message;
@@ -246,16 +248,16 @@ var app2 = Vue.createApp({
       });
     },
     delProduct: function delProduct() {
-      var _this6 = this;
+      var _this5 = this;
 
       var dataID = this.tempItemInfo.id;
       axios["delete"]("".concat(baseUrl, "/api/").concat(API_PATH, "/admin/product/").concat(dataID)).then(function (res) {
         //成功刪除產品，sweetalert 跳出提示訊息視窗
-        swal('成功！', "\u5DF2\u522A\u9664 ".concat(_this6.tempItemInfo.title, " \u7684\u8CC7\u8A0A"), {
+        swal('成功！', "\u5DF2\u522A\u9664 ".concat(_this5.tempItemInfo.title, " \u7684\u8CC7\u8A0A"), {
           icon: "success"
         });
 
-        _this6.getProducts(_this6.pagination.current_page);
+        _this5.getProducts(_this5.pagination.current_page);
       })["catch"](function (err) {
         console.log(err.response); //刪除失敗，sweetalert 跳出提示訊息視窗
 
