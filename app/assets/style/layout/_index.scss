@@ -1,0 +1,12 @@
+html,
+body {
+  height: 100%;
+}
+
+.form{
+    &-signin {
+        width: 100%;
+        max-width: 380px;
+        margin: auto;
+    }
+}
