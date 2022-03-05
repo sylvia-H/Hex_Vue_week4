@@ -113,9 +113,11 @@ const app2 = Vue.createApp({
             }
 
             if(item) {
-                this.tempItemInfo = {
-                    ...item
-                };
+                this.tempItemInfo = JSON.parse(JSON.stringify(item));
+
+                if(!this.tempItemInfo.imagesUrl) {
+                    this.tempItemInfo.imagesUrl = [];
+                }
             }
         
             editModal.show();
