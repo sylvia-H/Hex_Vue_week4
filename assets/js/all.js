@@ -165,6 +165,7 @@ var app2 = Vue.createApp({
     changeStatus: function changeStatus(id) {
       var _this3 = this;
 
+      this.is_addNewProduct = 0;
       this.products.forEach(function (item) {
         if (item.id === id) {
           item.is_enabled ? item.is_enabled = 0 : item.is_enabled = 1;
