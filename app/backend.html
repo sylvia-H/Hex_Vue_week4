@@ -219,36 +219,36 @@ current: backend
           <div class="col-sm-8">
             <div class="row">
               <div class="mb-3 col-md-6">
-                <label for="title" class="form-label">島嶼名稱</label>
-                <input id="title" type="text" class="form-control" placeholder="請輸入島名" v-model="tempItemInfo.title">
+                <label for="title" class="form-label">產品名稱</label>
+                <input id="title" type="text" class="form-control" placeholder="請輸入產品名稱" v-model="tempItemInfo.title">
               </div>  
               <div class="mb-3 col-md-6">
-                <label for="category" class="form-label">所在國家/地區</label>
+                <label for="category" class="form-label">類別</label>
                 <input id="category" type="text" class="form-control"
-                        placeholder="請輸入所在國家/地區" v-model="tempItemInfo.category">
+                        placeholder="請輸入產品類別" v-model="tempItemInfo.category">
               </div>
             </div>
 
             <div class="row">
               <div class="mb-3 col-md-6">
-                <label for="price" class="form-label">內含島嶼數量</label>
-                <input id="number" type="number" class="form-control" placeholder="請輸入島嶼數量" v-model.number="tempItemInfo.number">
+                <label for="number" class="form-label">內含產品數量</label>
+                <input id="number" type="number" class="form-control" placeholder="請輸入數量" v-model.number="tempItemInfo.number">
               </div>
               <div class="mb-3 col-md-6">
-                <label for="price" class="form-label">單位</label>
+                <label for="unit" class="form-label">單位</label>
                 <input id="unit" type="text" class="form-control" placeholder="請輸入單位" v-model="tempItemInfo.unit">
               </div>
             </div>
 
             <div class="row">
               <div class="mb-3 col-md-6">
-                <label for="origin_price" class="form-label">美金售價（萬元）</label>
-                <input id="origin_price" type="number" min="0" class="form-control" placeholder="請輸入美金售價" v-model.number="tempItemInfo.origin_price">
+                <label for="origin_price" class="form-label">原價</label>
+                <input id="origin_price" type="number" min="0" class="form-control" placeholder="請輸入產品原價" v-model.number="tempItemInfo.origin_price">
               </div>
               <div class="mb-3 col-md-6">
-                <label for="price" class="form-label">約合台幣（萬元）</label>
+                <label for="price" class="form-label">優惠價</label>
                 <input id="price" type="number" min="0" class="form-control"
-                        placeholder="約合台幣售價" v-model.number="tempItemInfo.price">
+                        placeholder="請輸入折扣優惠價" v-model.number="tempItemInfo.price">
               </div>
             </div>
             <hr>
