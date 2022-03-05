@@ -131,22 +131,6 @@ const app2 = Vue.createApp({
             delModal.show();
 
         },
-        copyText(){
-            const clipboard = new ClipboardJS('#btn_copyLink');
-            
-            clipboard.on('success', function(e) {
-                console.info('Action:', e.action);
-                console.info('Text:', e.text);
-                console.info('Trigger:', e.trigger);
-            
-                e.clearSelection(); //取消選取
-            });
-            
-            clipboard.on('error', function(e) {
-                console.error('Action:', e.action);
-                console.error('Trigger:', e.trigger);
-            });
-        },
         delProduct(){
             const dataID = this.tempItemInfo.id;
             axios.delete(`${baseUrl}/api/${API_PATH}/admin/product/${dataID}`)

@@ -53,6 +53,22 @@ const modal_edit = {
                 this.is_uploadImg = 0;
             })
         },
+        copyText(){
+            const clipboard = new ClipboardJS('#btn_copyLink');
+            
+            clipboard.on('success', function(e) {
+                console.info('Action:', e.action);
+                console.info('Text:', e.text);
+                console.info('Trigger:', e.trigger);
+            
+                e.clearSelection(); //取消選取
+            });
+            
+            clipboard.on('error', function(e) {
+                console.error('Action:', e.action);
+                console.error('Trigger:', e.trigger);
+            });
+        },
     }
 }
 
