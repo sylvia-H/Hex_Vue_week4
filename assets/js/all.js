@@ -89,6 +89,19 @@ var modal_edit = {
 
         _this.is_uploadImg = 0;
       });
+    },
+    copyText: function copyText() {
+      var clipboard = new ClipboardJS('#btn_copyLink');
+      clipboard.on('success', function (e) {
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+        e.clearSelection(); //取消選取
+      });
+      clipboard.on('error', function (e) {
+        console.error('Action:', e.action);
+        console.error('Trigger:', e.trigger);
+      });
     }
   }
 }; // 元件 - Modal 刪除產品樣板
@@ -237,19 +250,6 @@ var app2 = Vue.createApp({
     openDelModal: function openDelModal(item) {
       this.tempItemInfo = _objectSpread({}, item);
       delModal.show();
-    },
-    copyText: function copyText() {
-      var clipboard = new ClipboardJS('#btn_copyLink');
-      clipboard.on('success', function (e) {
-        console.info('Action:', e.action);
-        console.info('Text:', e.text);
-        console.info('Trigger:', e.trigger);
-        e.clearSelection(); //取消選取
-      });
-      clipboard.on('error', function (e) {
-        console.error('Action:', e.action);
-        console.error('Trigger:', e.trigger);
-      });
     },
     delProduct: function delProduct() {
       var _this5 = this;
